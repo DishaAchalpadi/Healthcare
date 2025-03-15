@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance Programs in India</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <marquee><h1>Health Risk Prediction Dashboard</h1></marquee>
+        <nav>
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='personal-details.html'">Personal Details</button>
+            <button onclick="window.location.href='health-data.html'">Health Data</button>
+            <button onclick="window.location.href='input-data.html'">View Input Data</button>
+            <button onclick="window.location.href='insurance.html'">Insurance</button>
+            <button onclick="window.location.href='virtualcall.html'">Virtual Call Assistance</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Need Assistance?</h2>
+        <p>Call our 24/7 Health Insurance Assistance Helpline:</p>
+        <h3>📞 Toll-Free Number: <a href="tel:1800111565">1800-111-565</a></h3>
+        <p>For more details, visit the <a href="https://www.pmjay.gov.in/contact-us" target="_blank">PMJAY Contact Page</a>.</p>
+    </div>
+
+    <div class="container">
+        <h2>Call a Doctor for Assistance</h2>
+        <p>Need urgent medical consultation? Call a doctor now.</p>
+        <h3>📞 Doctor Helpline: <a href="tel:18002580014">1800-258-0014</a></h3>
+        <p>For online consultations, visit <a href="https://www.esanjeevani.in/" target="_blank">eSanjeevani Telemedicine</a>.</p>
+    </div>
+
+    <div class="container">
+        <h2>AI Health Assistant</h2>
+        <p>Chat with our AI-powered health assistant for quick guidance.</p>
+        <textarea id="ai-input" placeholder="Describe your symptoms..."></textarea>
+        <button onclick="getAIResponse()">Ask AI</button>
+        <p id="ai-response"></p>
+    </div>
+
+    <div class="container">
+        <h2>Virtual Doctor Call</h2>
+        <p>Start a video consultation with a doctor.</p>
+        <button onclick="window.open('https://www.practo.com/video', '_blank')">Start Video Call</button>
+
+        <button onclick="window.location.href='insurance.html'">Previous</button>
+        <button onclick="window.location.href='index.html'">Finish</button>
+    </div>
+
+    <script>
+        function getAIResponse() {
+            let userInput = document.getElementById("ai-input").value;
+            let response = "I'm here to assist you. Please consult a doctor for serious concerns.";
+            if (userInput.toLowerCase().includes("fever")) {
+                response = "You may have a mild fever. Stay hydrated and rest. Consult a doctor if symptoms persist.";
+            } else if (userInput.toLowerCase().includes("cough")) {
+                response = "Try warm fluids and rest. If coughing persists, consider a consultation.";
+            }
+            document.getElementById("ai-response").innerText = response;
+        }
+    </script>
+    
+</body>
+</html>

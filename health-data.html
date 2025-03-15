@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Data</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <marquee><h1>Health Risk Prediction Dashboard</h1></marquee>
+        <nav>
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='personal-details.html'">Personal Details</button>
+            <button onclick="window.location.href='health-data.html'">Health Data</button>
+        
+            <button onclick="window.location.href='input-data.html'">View Input Data</button>
+            <button onclick="window.location.href='insurance.html'">Insurance</button>
+            <button onclick="window.location.href='virtualcall.html'">Virtual Call Assistance</button>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Enter Your Health Data</h2>
+        <form id="health-form">
+            <label>Heart Rate: <input type="number" id="heart-rate" required></label>
+            <label>BP Systolic: <input type="number" id="bp-systolic" required></label>
+            <label>BP Diastolic: <input type="number" id="bp-diastolic" required></label>
+            <label>Blood Sugar: <input type="number" id="blood-sugar" required></label>
+            <label>Oxygen Level: <input type="number" id="oxygen-level" required></label>
+            <label>Cholesterol Level: <input type="number" id="cholesterol-level" required></label>
+            <label>Breathing Rate: <input type="number" id="breathing-rate" required></label>
+            <button type="button" onclick="updateChart()">Update Chart</button>
+            <button type="button" onclick="predictRisk()">Predict Risk</button>
+            <button type="button" onclick="window.location.href='input-data.html'">Next</button>
+        </form>
+        <canvas id="healthChart" width="400" height="200"></canvas>
+        <p id="prediction" style="font-weight: bold; margin-top: 20px;"></p>
+        <button onclick="window.location.href='personel-details.html'">Previous</button>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('healthChart').getContext('2d');
+        const healthChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Heart Rate', 'BP Systolic', 'BP Diastolic', 'Blood Sugar', 'Oxygen Level', 'Cholesterol Level', 'Breathing Rate'],
+                datasets: [{
+                    label: 'Health Data',
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 205, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function updateChart() {
+            const heartRate = document.getElementById('heart-rate').value;
+            const bpSystolic = document.getElementById('bp-systolic').value;
+            const bpDiastolic = document.getElementById('bp-diastolic').value;
+            const bloodSugar = document.getElementById('blood-sugar').value;
+            const oxygenLevel = document.getElementById('oxygen-level').value;
+            const cholesterolLevel = document.getElementById('cholesterol-level').value;
+            const breathingRate = document.getElementById('breathing-rate').value;
+
+            // Save to localStorage
+            localStorage.setItem('heartRate', heartRate);
+            localStorage.setItem('bpSystolic', bpSystolic);
+            localStorage.setItem('bpDiastolic', bpDiastolic);
+            localStorage.setItem('bloodSugar', bloodSugar);
+            localStorage.setItem('oxygenLevel', oxygenLevel);
+            localStorage.setItem('cholesterolLevel', cholesterolLevel);
+            localStorage.setItem('breathingRate', breathingRate);
+
+            healthChart.data.datasets[0].data = [heartRate, bpSystolic, bpDiastolic, bloodSugar, oxygenLevel, cholesterolLevel, breathingRate];
+            healthChart.update();
+        }
+
+        function predictRisk() {
+            const heartRate = parseFloat(document.getElementById("heart-rate").value);
+            const bpSystolic = parseFloat(document.getElementById("bp-systolic").value);
+            const bpDiastolic = parseFloat(document.getElementById("bp-diastolic").value);
+            const bloodSugar = parseFloat(document.getElementById("blood-sugar").value);
+            const oxygenLevel = parseFloat(document.getElementById("oxygen-level").value);
+            const cholesterol = parseFloat(document.getElementById("cholesterol-level").value);
+            const breathingRate = parseFloat(document.getElementById("breathing-rate").value);
+            
+            // Placeholder logic for prediction
+            let riskScore = (heartRate * 0.2) + (bpSystolic * 0.15) + (bpDiastolic * 0.1) + (bloodSugar * 0.25) + (oxygenLevel * -0.2) + (cholesterol * 0.3) + (breathingRate * 0.1);
+            let riskLevel = riskScore > 150 ? "High Risk" : "Low Risk";
+            document.getElementById("prediction").innerText = `Risk Level: ${riskLevel}`;
+
+            // Update chart with the entered data
+            updateChart();
+        }
+    </script>
+</body>
+</html>

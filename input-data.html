@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Input Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <marquee><h1>Health Risk Prediction Dashboard</h1></marquee>
+        <nav>
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='personal-details.html'">Personal Details</button>
+            <button onclick="window.location.href='health-data.html'">Health Data</button>
+            <button onclick="window.location.href='input-data.html'">View Input Data</button>
+            <button onclick="window.location.href='insurance.html'">Insurance</button>
+            <button onclick="window.location.href='virtualcall.html'">Virtual Call Assistance</button>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Your Input Data</h2>
+        <div id="data-display"></div>
+        <button onclick="window.location.href='health-data.html'">Previous</button>
+        <button onclick="window.location.href='insurance.html'">Next</button>
+        
+    </div>
+
+    <script>
+        // Function to display the input data
+        function displayInputData() {
+            const name = localStorage.getItem('name');
+            const age = localStorage.getItem('age');
+            const gender = localStorage.getItem('gender');
+            const heartRate = localStorage.getItem('heartRate');
+            const bpSystolic = localStorage.getItem('bpSystolic');
+            const bpDiastolic = localStorage.getItem('bpDiastolic');
+            const bloodSugar = localStorage.getItem('bloodSugar');
+            const oxygenLevel = localStorage.getItem('oxygenLevel');
+            const cholesterolLevel = localStorage.getItem('cholesterolLevel');
+            const breathingRate = localStorage.getItem('breathingRate');
+           
+
+            const dataDisplay = document.getElementById('data-display');
+            dataDisplay.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Heart Rate:</strong> ${heartRate}</p>
+                <p><strong>BP Systolic:</strong> ${bpSystolic}</p>
+                <p><strong>BP Diastolic:</strong> ${bpDiastolic}</p>
+                <p><strong>Blood Sugar:</strong> ${bloodSugar}</p>
+                <p><strong>Oxygen Level:</strong> ${oxygenLevel}</p>
+                <p><strong>Cholesterol Level:</strong> ${cholesterolLevel}</p>
+                <p><strong>Breathing Rate:</strong> ${breathingRate}</p>
+                
+            `;
+        }
+
+        // Call the function to display data when the page loads
+        window.onload = displayInputData;
+    </script>
+</body>
+</html>

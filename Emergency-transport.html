@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Transport</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+    
+</head>
+<body>
+    <header>
+        <marquee><h1>Health Risk Prediction Dashboard</h1></marquee>
+    </header>
+
+
+
+<!-- Emergency Transport -->
+<div class="container window" id="transport-access">
+    <h2>Find Emergency Transport</h2>
+    <button onclick="findEmergencyTransport()">Find Nearest Transport</button>
+    <p id="transport-status"></p>
+    <button onclick="window.location.href='index.html'">Home</button>
+</div>
+
+<style>
+    button{
+        background-color: #f63d14;
+        color: white;
+    }
+</style>
+
+<script>
+    function showWindow(windowId) {
+        document.querySelectorAll('.window').forEach(window => {
+            window.classList.remove('active');
+        });
+        document.getElementById(windowId).classList.add('active');
+    }
+
+    function findEmergencyTransport() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                window.open(`https://www.google.com/maps/search/ambulance+near+me/@${lat},${lng},15z`, '_blank');
+            }, () => {
+                document.getElementById("transport-status").innerText = "Location access denied or unavailable.";
+            });
+        } else {
+            document.getElementById("transport-status").innerText = "Geolocation is not supported by this browser.";
+        }
+    }
+</script>
+</body>
+</html>

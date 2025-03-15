@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <marquee><h1>Health Risk Prediction Dashboard</h1></marquee>
+        <nav>
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='personal-details.html'">Personal Details</button>
+            <button onclick="window.location.href='health-data.html'">Health Data</button>
+            <button onclick="window.location.href='input-data.html'">View Input Data</button>
+            <button onclick="window.location.href='insurance.html'">Insurance</button>
+            <button onclick="window.location.href='virtualcall.html'">Virtual Call Assistance</button>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Enter Your Personal Details</h2>
+        <form id="personal-form">
+            <label>Name: <input type="text" id="name" required></label>
+            <label>Age: <input type="number" id="age" required></label>
+            <label>Gender:
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </label>
+            <button type="button" onclick="savePersonalDetails()">Save Details</button>
+            <button type="button" onclick="window.location.href='health-data.html'">Next</button>
+        </form>
+        <button onclick="window.location.href='index.html'">Previous</button>
+    </div>
+
+    <script>
+        function savePersonalDetails() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let gender = document.getElementById("gender").value;
+    
+            // Save to localStorage
+            localStorage.setItem('name', name);
+            localStorage.setItem('age', age);
+            localStorage.setItem('gender', gender);
+    
+            alert(`Personal Details Saved:\nName: ${name}\nAge: ${age}\nGender: ${gender}`);
+        }
+    </script>
+</body>
+</html>
+
